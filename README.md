@@ -1,21 +1,22 @@
 # azure-terraform-ansible
 Infrastructure Deployment on Azure with Terraform and Ansible
-# Requeriments
+# 1. Requeriments
 
     Azure cli
     Terraform
     Ansible
 
-# 1. Login to Azure
+# 2. Login to Azure
     az login
 
-# 3 Create a Service Principal for Terraform
+# 3. Create a Service Principal for Terraform
     
     az ad sp create-for-rbac --name <service_principal_name> --role Contributor --scopes /subscriptions/<subscription_id>
 
 # 4. Create a Service Principal for Ansible
     
     az ad sp create-for-rbac --name <service_principal_name> --role Contributor --scopes /subscriptions/<subscription_id>
+
     # 4.1. With the output of the previous command, set the following environment variables:
 
     # For Terraform
@@ -29,6 +30,7 @@ Infrastructure Deployment on Azure with Terraform and Ansible
     export AZURE_TENANT_ID="<azure_subscription_tenant_id>"
     export AZURE_CLIENT_ID="<service_principal_appid>"
     export AZURE_CLIENT_SECRET="<service_principal_password>"
+    
     # 4.2. You also can put the previous environment variables in a file called azure-profile.sh and run the following command:
     chmod +x azure-profile.sh
     source azure-profile.sh
@@ -42,7 +44,7 @@ Infrastructure Deployment on Azure with Terraform and Ansible
 
 # 6. Ansible
     # Add the public IP to the hosts.yaml file
-    
+
     ansible-playbook -i inventory/hosts playbook.yml
 
 # 7. Destroy
